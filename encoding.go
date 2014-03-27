@@ -34,8 +34,8 @@ type Encoder struct {
 	writer io.Writer
 }
 
-// Instantiate a new Encoder that uses the specified suite and key to
-// generate an encrypted binary blob to write to writer.
+// Instantiate a new Encoder that uses the specified suite and key to generate
+// an encrypted binary blob to write to writer.
 func NewEncoder(suite byte, key []byte, writer io.Writer) *Encoder {
 	return &Encoder{suite: suite, key: key, writer: writer}
 }
@@ -108,7 +108,7 @@ func (encoder *Encoder) encryptPayload(payload []byte) ([]byte, error) {
 	// Apply padding to the compressed payload to ensure that it aligns with
 	// the block size required by the cipher.
 	n := compressedPayload.Len()
-	for i := 0; i < blockMode.BlockSize() - (n % blockMode.BlockSize()); i++ {
+	for i := 0; i < blockMode.BlockSize()-(n%blockMode.BlockSize()); i++ {
 		compressedPayload.WriteByte(0x0)
 	}
 
